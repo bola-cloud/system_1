@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->integer('sale');
             $table->string('brand');
             $table->integer('product_code')->default('0');
+            $table->enum('status',['instoke','out of stoke'])->default('instoke');
         });
     }
 

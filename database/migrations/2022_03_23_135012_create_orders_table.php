@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total');
             $table->string('address')->nullable();
             $table->enum('status',['ordered','canceled','delivered']);
+            $table->boolean('is_shipping')->default(false);
             $table->timestamps();
         });
     }

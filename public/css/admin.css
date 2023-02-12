@@ -1,0 +1,65 @@
+.footer{
+    bottom: 0;
+    width: 84%;
+    position: fixed;
+    height: 7%;
+}
+.main-panel {
+    background: #f4f5f7;
+}
+td .badge {
+    text-decoration: none;
+    cursor: pointer;
+}
+.text-sm{
+    margin-top: revert;
+}
+.pl-4,.px-4{
+    padding-left: 1.5rem !important;
+}
+.pb-2,.py-2{
+    padding-left: .5rem !important;
+}
+.pt-2,.py-2{
+    padding-left: .5rem !important;
+}
+.bg-white{
+    background-color:#e9ecef !important ;
+    cursor: pointer;
+
+}
+.border{
+    border: 1px solid #dee2e6 !important;
+    margin: 2px;
+}
+/* pagination */
+nav svg{
+    height: 20px;
+}
+svg{
+    overflow: hidden;
+    vertical-align: middle;
+}
+.wrap-pagination-info{
+    margin-top: 3px;
+    border-top: 1px solid #e6e6e6;
+    padding-top: 10px;
+}
+.wrap-pagination-info .hidden{
+    display: block !important;
+}
+.wrap-pagination-info .rounded-l-md{
+    margin-right: 5px;
+}
+.wrap-pagination-info .rounded-r-md{
+    margin-left: 5px;
+}
+.search {
+    display: flex;
+}
+    
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

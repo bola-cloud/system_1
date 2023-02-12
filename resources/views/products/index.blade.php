@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-md-9">
-                    <div class="card">
+                    <div class="card has-shadow">
                         <div class="card-header">
                             <h4  style="float:left">Add product</h4>
                             <a href="#" style="float:right ;" class="btn btn-outline-info" data-toggle="modal" data-target="#addProduct" >
@@ -43,6 +43,7 @@
                                         <th>qu_inshop</th>
                                         <th>qu_instore</th>
                                         <th>brand</th>
+                                        <th>marks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,6 +74,7 @@
                                         </td>
                                     </tr>
                                      <!-- Modals --> 
+                                     
                                      <!-- modal to edit product -->
                                     <div class="modal right fade" id="editProduct{{$product->id}}" data-backdrop="static" data-keyboard="false"
                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -86,47 +88,50 @@
                                                 {{$product->id}}
                                             </div>
                                             <div class="modal-body">
-                                            <form action="{{route('products.update', $product->id)}}"  method="POST" id="update_product{{$product->id}}" enctype='multipart/form-data'>
-                                                @csrf
-                                                @method('put')
-
-                                                <div class="form-group">
-                                                    <label for="">Name</label>
-                                                    <input type="text" name="product_name" value="{{$product->product_name}}" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">description</label>
-                                                    <textarea type="description" name="description"  cols="30" rows="2" class="form-control">{{$product->description}}</textarea>
-                                                </div>
-                                                <div class="form-group d-inline-block mr-5">
-                                                    <label for="">price</label>
-                                                    <input type="number" name="price" value="{{$product->price}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block">
-                                                    <label for="">Cost</label>
-                                                    <input type="number" name="cost" value="{{$product->cost}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block mr-5">
-                                                    <label for="">sale</label>
-                                                    <input type="number" name="sale" value="{{$product->sale}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block ">
-                                                    <label for="">sale_price</label>
-                                                    <input type="number" name="sale_price" value="{{$product->sale_price}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block mr-5">
-                                                    <label for="">Quantity_inshop</label>
-                                                    <input type="number" name="quantity_inshop" value="{{$product->quantity_inshop}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block">
-                                                    <label for="">quantity_total</label>
-                                                    <input type="number" name="quantity_total" value="{{$product->quantity_total}}" class="form-control">
-                                                </div>
-                                                <div class="form-group d-inline-block mr-4">
-                                                    <label for=""> Brand</label>
-                                                    <input type="text" name="brand" value="{{$product->brand}}" class="form-control">
-                                                </div>
-                                            </form>
+                                                <form action="{{route('products.update', $product->id)}}"  method="POST" id="update_product{{$product->id}}" enctype='multipart/form-data'>
+                                                    @csrf
+                                                    @method('put')
+                                                    <div class="form-group">
+                                                        <label for="">Name</label>
+                                                        <input type="text" name="product_name" value="{{$product->product_name}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">description</label>
+                                                        <textarea type="description" name="description"  cols="30" rows="2" class="form-control">{{$product->description}}</textarea>
+                                                    </div>
+                                                    <div class="form-group d-inline-block mr-5">
+                                                        <label for="">price</label>
+                                                        <input type="number" name="price" value="{{$product->price}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block">
+                                                        <label for="">Cost</label>
+                                                        <input type="number" name="cost" value="{{$product->cost}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block mr-5">
+                                                        <label for="">sale</label>
+                                                        <input type="number" name="sale" value="{{$product->sale}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block ">
+                                                        <label for="">sale_price</label>
+                                                        <input type="number" name="sale_price" value="{{$product->sale_price}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block mr-5">
+                                                        <label for="">Quantity_inshop</label>
+                                                        <input type="number" name="quantity_inshop" value="{{$product->quantity_inshop}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block">
+                                                        <label for="">quantity_total</label>
+                                                        <input type="number" name="quantity_total" value="{{$product->quantity_total}}" class="form-control">
+                                                    </div>
+                                                    <div class="form-group d-inline-block mr-4">
+                                                        <label for=""> Brand</label>
+                                                        <input type="text" name="brand" value="{{$product->brand}}" class="form-control">
+                                                    </div>
+                                                    <!-- <div class="form-group d-inline-block mr-4">
+                                                        <label for=""> category</label>
+                                                        <input type="text" name="brand" value="" class="form-control">
+                                                    </div> -->
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn btn-warning" form="update_product{{$product->id}}" >Save changes</button>
@@ -140,26 +145,26 @@
                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                {{$product->id}}
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('products.destroy', $product->id) }}"  method="POST" id="delete_product">
-                                                    @csrf 
-                                                    @method('delete')
-                                                    <p>Are you sure you want to delete {{$product->product_name}}</p>
-                                                    
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-default" data-dismiss="modal" > Cancel</button>
-                                                <button class="btn btn-danger" type="submit" form="delete_product" > Delete</button>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    {{$product->id}}
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('products.destroy', $product->id) }}"  method="POST" id="delete_product">
+                                                        @csrf 
+                                                        @method('delete')
+                                                        <p>Are you sure you want to delete {{$product->product_name}}</p>
+                                                        
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal" > Cancel</button>
+                                                    <button class="btn btn-danger" type="submit" form="delete_product" > Delete</button>
 
-                                            </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -180,72 +185,80 @@
                      aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ route('products.store') }}"  method="POST" id="add-form">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="">Name</label>
-                                        <input type="text" name="product_name" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">description</label>
-                                        <textarea type="description" name="description" cols="30" rows="2" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group d-inline-block mr-5">
-                                        <label for="">price</label>
-                                        <input type="number" name="price" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block">
-                                        <label for="">Cost</label>
-                                        <input type="number" name="cost" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block mr-5">
-                                        <label for="">sale</label>
-                                        <input type="number" name="sale" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block ">
-                                        <label for="">sale_price</label>
-                                        <input type="number" name="sale_price" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block mr-5">
-                                        <label for="">Quantity_inshop</label>
-                                        <input type="number" name="quantity_inshop" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block">
-                                        <label for="">quantity_total</label>
-                                        <input type="number" name="quantity_total" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block mr-5">
-                                        <label for=""> Brand</label>
-                                        <input type="text" name="brand" class="form-control">
-                                    </div>
-                                    <div class="form-group d-inline-block">
-                                        <label for=""> code</label>
-                                        <input type="number" name="product_code" class="form-control">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" form="add-form" >Save product</button>
-                            </div>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('products.store') }}"  method="POST" id="add-form">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="">Name</label>
+                                            <input type="text" name="product_name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">description</label>
+                                            <textarea type="description" name="description" cols="30" rows="2" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group d-inline-block mr-5">
+                                            <label for="">price</label>
+                                            <input type="number" name="price" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block">
+                                            <label for="">Cost</label>
+                                            <input type="number" name="cost" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block mr-5">
+                                            <label for="">sale</label>
+                                            <input type="number" name="sale" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block ">
+                                            <label for="">sale_price</label>
+                                            <input type="number" name="sale_price" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block mr-5">
+                                            <label for="">Quantity_inshop</label>
+                                            <input type="number" name="quantity_inshop" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block">
+                                            <label for="">quantity_total</label>
+                                            <input type="number" name="quantity_total" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block mr-5">
+                                            <label for=""> Brand</label>
+                                            <input type="text" name="brand" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block">
+                                            <label for=""> code</label>
+                                            <input type="number" name="product_code" class="form-control">
+                                        </div>
+                                        <div class="form-group d-inline-block mr-5">
+                                        <select class="form-select">
+                                            @foreach($categories as $category)
+                                                <option>{{$category->category_name}}</option>    
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" form="add-form" >Save product</button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     
 
-                </div>   <!-- end-col-md-9 -->
+                </div>   
+                <!-- end-col-md-9 -->
 
                 <!--category-->
 
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card has-shadow">
                         <div class="card-header">
                             <h5> product category</h5>
                         </div>
@@ -259,12 +272,11 @@
                             </a>
                             <!-- Submenu content -->
                             <div id='submenu2' class="collapse sidebar-submenu">
-                                <a href="#" class="list-group-item list-group-item-action text-gray">
-                                    <span class="menu-collapsed">الصف الرابع </span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action text-gray">
-                                    <span class="menu-collapsed">ادوات</span>
-                                </a>
+                                @foreach($categories as $category)
+                                    <a href="#" class="list-group-item list-group-item-action text-gray">
+                                        <span class="menu-collapsed"> {{$category->category_name}}</span>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

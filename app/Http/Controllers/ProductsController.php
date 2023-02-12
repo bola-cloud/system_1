@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Products;
+use App\Category;
 
 
 class ProductsController extends Controller
@@ -11,9 +12,10 @@ class ProductsController extends Controller
     public $search;
     public function index()
     {
+        $categories=Category::all();
         $products=Products::paginate(10);
         $filtered_products = Products::where("product_name",'LIKE','%'.$this->search.'%')->get();
-        return view('products.index',compact('products','filtered_products'));        //where like---> search 
+        return view('products.index',compact('products','filtered_products'),['categories'=>$categories]);        //where like---> search 
     }
     public function store(Request $request)
     {

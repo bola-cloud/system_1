@@ -38,14 +38,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         
     }
-    // public function username()
-    // {
-    //     if(Auth::attempt(['phone' => request('phone'), 'password' => request('password')]) ||
-    //         Auth::attempt(['email' => request('email'), 'password' => request('password')]) ||
-    //         Auth::attempt(['name' => request('name'), 'password' => request('password')])){
-    //             // do something ...
-    //     }
-    // }
+   
     public function username()
     {
         return 'name';
