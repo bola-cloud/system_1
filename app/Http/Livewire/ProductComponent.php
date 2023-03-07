@@ -31,7 +31,7 @@ class ProductComponent extends Component
     {
         
         $categories=Category::all();
-        $products=Products::where('product_name', 'like', '%'.$this->search.'%')->paginate(5);
+        $products=Products::where('product_name', 'like', '%'.$this->search.'%')->paginate(15);
         return view('livewire.product-component' ,compact('products','products'),['categories'=>$categories])->layout('layouts.bars.navbar');
     }
 

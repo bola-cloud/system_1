@@ -6,11 +6,11 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="category-btn d-flex mt-3">
-                        <div class="dropdown ms-2 me-2">
-                            <select  class="form-select" aria-label="Default select example" wire:model="category_id">
-                                <option value=""selected>category</option>
+                        <div class="dropdown ms-2 me-2 ">
+                            <select  class="form-select" style="background-color:#52cdff87;" aria-label="Default select example" wire:model="category_id">
+                                <option class="bg-light" value=""selected>category</option>
                                 @foreach($categories as $category)
-                                    <option class="selectpicker show-tick"  value="{{$category->id}}">{{$category->category_name}}</option>
+                                    <option class="bg-light"  value="{{$category->id}}">{{$category->category_name}}</option>
                                 @endforeach
                             </select>
                         </div>       
@@ -142,7 +142,7 @@
                             <div class="update-clear">
                                 <a class="btn btn-clear" href="#" wire:click.prevent="destroyAll()">Clear Shopping Cart</a>
                             </div>
-                            <a class="btn btn-success" href="#" wire:click.prevent="checkout()">check out</a>
+                            <a class="btn btn-success ms-2" href="#" wire:click.prevent="edit()">Edit </a>
                         @else
                             <p>no item added</p>
                         @endif

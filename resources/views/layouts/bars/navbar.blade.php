@@ -36,75 +36,36 @@
 
 <body>
         <!-- main-bar -->
-    <nav class="navbar navbar-expand-lg" aria-label="Main navigation" style="background: #5d9fd5">
-        <div class="container-fluid ">
-            <a class="navbar-brand" href="#">اسم الشركة</a>
-            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav class="navbar navbar-expand-custom navbar-mainbg">
+            <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white"></i>
             </button>
-
-            <div class="navbar-collapse offcanvas-collapse d-flex justify-content-between" id="navbarsExampleDefault">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
                     <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link" href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-address-book"></i>Address Book</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Switch account</a>
+                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-clone"></i>Components</a>
                     </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Calendar</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-chart-bar"></i>Charts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);"><i class="far fa-copy"></i>Documents</a>
+                    </li>
                 </ul>
-                
             </div>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown" style="float:left;">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        @if(Auth::check())
-                            {{ Auth::user()->name }}    
-                        @endif
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- sec-nav -->
-    <div class="nav-scroller bg-body shadow-sm d-flex flex-row-reverse mt-1">
-        <nav class="nav nav-underline" aria-label="Secondary navigation">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link">اضافة الي العربه</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"> اضافة منتج جديد</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">اضافة منتج موجود</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" >استخراج فاتورة</a></li>
-                <li class="nav-item"><a href="{{route('products')}}" class="nav-link active">عرض المنتجات</a></li>
-            </ul>
         </nav>
-    </div>
-
+    <!-- sec-nav -->
         <!-- sessions -->
 
     <div class="container">

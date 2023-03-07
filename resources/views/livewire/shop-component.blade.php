@@ -1,12 +1,12 @@
-<div>
+<div wire:ignore.self>
     
     <!-- search bar -->
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="category-btn d-flex mt-3">
-                        <div class="dropdown ms-2 me-2">
+                    <div class="category-btn d-flex mt-3" >
+                        <div class="ms-2 me-2" style="width:150px;">
                             <select  class="form-select" aria-label="Default select example" wire:model="category_id">
                                 <option value=""selected>category</option>
                                 @foreach($categories as $category)
@@ -14,14 +14,6 @@
                                 @endforeach
                             </select>
                         </div>       
-                        <!-- <div class="dropdown me-2">
-                            <select  class="form-select" aria-label="Default select example" wire:model="category_id">
-                                <option value=""selected>category</option>
-                                @foreach($categories as $category)
-                                    <option class="selectpicker show-tick"  value="{{$category->id}}">{{$category->category_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>                            -->
                     </div>    
 
                 </div>
@@ -69,8 +61,8 @@
                             <div class="row mt-1 pb-4 pl-4 pt-1">
                                 @foreach($products as $product)
                                     <a href="#" wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',
-                                       {{$product->price}},{{$product->quantity_total}})">
-                                        <div class=" diver box">
+                                       {{$product->price}},{{$product->quantity_inshop}})">
+                                        <div class="diver box">
                                             <p class="product_details">
                                                 {{$product->product_name}}<br>
                                                 {{$product->description}}<br>

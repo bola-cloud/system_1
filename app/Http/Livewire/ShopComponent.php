@@ -20,10 +20,13 @@ class ShopComponent extends Component
     public $quantity;
     public $category_id;
     public $prod_quantity;
+    public $flag;
+    public $flag2;
 
 
     public function store($product_id,$product_name,$product_price,$quantity)
     {
+        $this->flag2=0;
         $this->product_id=$product_id;
         $this->product_name=$product_name;
         $this->product_price=$product_price;
@@ -38,30 +41,52 @@ class ShopComponent extends Component
         elseif(Cart::instance('cart')->count()>0)
         {
             $items=Cart::instance('cart')->content(); 
-            $items->search(function ($cartItem, $id) {              
-                if($cartItem->id == $this->product_id)
+            foreach( $items as  $item)
+            {
+                if($this->product_id == $item->id && $this->quantity > 0 && $this->quantity >$item->qty )
                 {
-                    if($cartItem->qty < $this->quantity)
-                    {
-                        Cart::update($id,$cartItem->qty+1);
-                    }                   
-                }    
-                else
-                {
-                    if(!$this->quantity < 1)
-                    {
-                        Cart::instance('cart')->add(
-                            ['id' => $this->product_id, 'name' =>$this->product_name,
-                             'qty' => 1, 'price' => $this->product_price]
-                        )->associate('App\Products');
-                        session()->flash('success_message','item added to cart');
-                    }
-                    else
-                    {
-                        session()->flash('warning','out of stock');
-                    }
-                }         
-            });            
+                    $item->qty +=1;
+                    $this->flag2=1;
+                }      
+            }
+            if($this->flag2==0 && $this->quantity > 0 && $this->quantity >$item->qty)
+            {
+                Cart::instance('cart')->add(
+                    ['id' => $this->product_id, 'name' =>$this->product_name,
+                    'qty' => 1, 'price' => $this->product_price]
+                )->associate('App\Products');
+                session()->flash('success_message','item added to cart');
+                $this->flag=0;
+            }
+            else{
+                session()->flash('warning','out of stock');
+            }
+            $this->flag2=0;
+
+            // $items->search(function ($cartItem, $id) {              
+            //     if($cartItem->id == $this->product_id)
+            //     {
+            //         if($cartItem->qty < $this->quantity)
+            //         {
+            //             Cart::update($id,$cartItem->qty+1);
+            //         }                   
+            //     }    
+            //     else
+            //     {
+            //         if(!$this->quantity < 1)
+            //         {
+            //             Cart::instance('cart')->add(
+            //                 ['id' => $this->product_id, 'name' =>$this->product_name,
+            //                  'qty' => 1, 'price' => $this->product_price]
+            //             )->associate('App\Products');
+            //             session()->flash('success_message','item added to cart');
+            //         }
+            //         else
+            //         {
+            //             session()->flash('warning','out of stock');
+            //         }
+            //     }         
+            // });          
         }
         $this->product_id=null;
         $this->product_name=null;
