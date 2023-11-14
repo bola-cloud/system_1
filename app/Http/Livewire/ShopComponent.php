@@ -58,35 +58,7 @@ class ShopComponent extends Component
                 session()->flash('success_message','item added to cart');
                 $this->flag=0;
             }
-            else{
-                session()->flash('warning','out of stock');
-            }
-            $this->flag2=0;
-
-            // $items->search(function ($cartItem, $id) {              
-            //     if($cartItem->id == $this->product_id)
-            //     {
-            //         if($cartItem->qty < $this->quantity)
-            //         {
-            //             Cart::update($id,$cartItem->qty+1);
-            //         }                   
-            //     }    
-            //     else
-            //     {
-            //         if(!$this->quantity < 1)
-            //         {
-            //             Cart::instance('cart')->add(
-            //                 ['id' => $this->product_id, 'name' =>$this->product_name,
-            //                  'qty' => 1, 'price' => $this->product_price]
-            //             )->associate('App\Products');
-            //             session()->flash('success_message','item added to cart');
-            //         }
-            //         else
-            //         {
-            //             session()->flash('warning','out of stock');
-            //         }
-            //     }         
-            // });          
+            $this->flag2=0;   
         }
         $this->product_id=null;
         $this->product_name=null;

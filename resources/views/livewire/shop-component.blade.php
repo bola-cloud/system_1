@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="category-btn d-flex mt-3" >
                         <div class="ms-2 me-2" style="width:150px;">
                             <select  class="form-select" aria-label="Default select example" wire:model="category_id">
@@ -17,15 +17,14 @@
                     </div>    
 
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <div class="row height d-flex justify-content-center align-items-center">
                         <div class="col-md-12">
                             <div class="search-form">
                                 <form action="">
                                     <div class="search">
                                         <i class="fa fa-search"></i>
-                                        <input type="text" class="form-control" placeholder="Have a question? Ask Now" name="" wire:model="search">
-                                        <button class="btn btn-primary">Search</button>
+                                        <input type="text" class="form-control w-100" placeholder="Have a question? Ask Now" name="" wire:model="search">
                                     </div>
                                 </form>
                             </div>
@@ -54,19 +53,21 @@
                 <div class="col-md-6 ">
                     <div class="has-shadow all_products">
                         <div style="display:flex; justify-content: center ;border-bottom: 1px solid #e6e6e6;">
-                            <h2 class="mt-2 me-3">اضافة منتج الي العربة </h2>
                             <P><i class="mt-3 fas fa-shopping-cart fa-lg"></i></P>
+                            <h2 class="mt-2 me-3">Add products to cart</h2>
+                            
                         </div>
                         <div class="col-md-12">
                             <div class="row mt-1 pb-4 pl-4 pt-1">
                                 @foreach($products as $product)
-                                    <a href="#" wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',
-                                       {{$product->price}},{{$product->quantity_inshop}})">
+                                    <a href="#" class="w-auto p-3" wire:click.prevent="store({{$product->id}},'{{$product->product_name}}',
+                                       {{$product->price}},{{$product->quantity_total}})">
                                         <div class="diver box">
                                             <p class="product_details">
                                                 {{$product->product_name}}<br>
                                                 {{$product->description}}<br>
-                                                {{$product->price}}                                            
+                                                {{$product->price}} LE <br> 
+                                                qu:{{$product->quantity_total}}                                                                                      
                                             </p>
                                         </div>
                                     </a>
@@ -78,8 +79,8 @@
                 <div class="col-md-6 chosen_products">
                     <div class="has-shadow all_products ps-2 pb-4 pe-2 pt-1">
                         <div style="display:flex; justify-content: center ;border-bottom: 1px solid #e6e6e6;">
-                            <h2 class="mt-1 me-3">المنتجات المختارة</h2>
-                            <P><i class="mt-2 fas fa-cart-arrow-down fa-lg"></i></P>
+                            <P><i class="mt-3 fas fa-cart-arrow-down fa-lg"></i></P>
+                            <h2 class="mt-1 me-3">Chosen products</h2>
                         </div>
                         @if(Cart::instance('cart')->count() > 0)
                             <table class="table table-borderless" id="table-back" >
@@ -136,7 +137,7 @@
                             </div>
                             <a class="btn btn-success" href="#" wire:click.prevent="checkout()">check out</a>
                         @else
-                            <p>no item added</p>
+                            <p class="d-flex justify-content-center mt-2">no item added</p>
                         @endif
                     </div>
                 </div>

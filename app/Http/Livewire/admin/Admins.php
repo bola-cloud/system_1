@@ -1,16 +1,11 @@
 <?php
 
 namespace App\Http\Livewire\Admin;
-use App\User;
-use App\Orders;
 
 use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-
-
-class UserComponent extends Component
+use App\User;
+use App\Orders;
+class Admins extends Component
 {
     public $name;
     public $phone;
@@ -20,25 +15,11 @@ class UserComponent extends Component
     public $password_confirmation;
     public $search;
 
-    use WithPagination;
-
     public function render()
     {
-        $users=User::where('category','user')->where('name', 'like', '%'.$this->search.'%')->paginate(10);
-        return view('livewire.admin.user-component',['users' =>$users])->layout('layouts.admin-layouts.dashboard');
+        $admins=User::where('category','admin')->where('name', 'like', '%'.$this->search.'%')->paginate(10);
+        return view('livewire.admin.admins',['admins' =>$admins])->layout('layouts.admin-layouts.dashboard');
     }
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-  
-    // protected $rules = [
-    //     'name'=>'required|min:4',
-    //     'phone' => 'required|min:10',
-    //     'category' => 'required',
-    //     'password' => 'min:8',
-    // ];
-    
     
     public function edit(int $user_id)
     {
@@ -52,23 +33,8 @@ class UserComponent extends Component
             return redirect()->route('admin_user');
         }
     }
-    // public function updated($fields)
-    // {
-    //     $this->validateOnly($fields,[
-    //         'name'=>'required|min:4',
-    //         'phone' => 'required|min:10',
-    //         'category' => 'required',
-    //         'password' => 'min:8',
-    //     ]);
-    // }
     public function update()
     {
-        $this->validate([
-            'name'=>'required|min:4',
-            'phone' => 'required|min:10',
-            'category' => 'required',
-            'password' => 'min:8',
-        ]);
         User::where('id',$this->user_id)->update([
             'name'=>$this->name,
             'category'=>$this->category,

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'System Home'),
+    'name' => env('System', 'Casher System '),
 
     /*
     |--------------------------------------------------------------------------

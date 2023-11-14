@@ -43,25 +43,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($users as $key => $user)
+                                            @foreach($admins as $key => $admin)
                                             <tr>
-                                                <td>{{$user->id}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->phone}}</td>
-                                                <td>{{$user->category}}</td>
+                                                <td>{{$admin->id}}</td>
+                                                <td>{{$admin->name}}</td>
+                                                <td>{{$admin->phone}}</td>
+                                                <td>{{$admin->category}}</td>
                                                 <td>
-                                                    <a class="badge badge-danger"  href="#" wire:click="delete({{$user->id}})" 
-                                                    data-bs-toggle="modal" data-bs-target="#deleteUser{{$user->id}}">delete</a>
+                                                    <a class="badge badge-danger"  href="#" wire:click="delete({{$admin->id}})" 
+                                                    data-bs-toggle="modal" data-bs-target="#deleteUser{{$admin->id}}">delete</a>
 
-                                                     <a class="badge badge-warning" href="{{route('User_profile',['user_id'=>$user->id])}}" >view profile</a>
+                                                     <a class="badge badge-warning" href="{{route('User_profile',['user_id'=>$admin->id])}}" >view profile</a>
 
                                                 </td>
-                                            </tr>
-                                            <!-- store -->
-                                                                                
+                                            </tr>                                         
+             
                                             <!-- delete modal -->
                                             <div wire:ignore>
-                                                <div class="modal right fade" id="deleteUser{{$user->id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                                                <div class="modal right fade" id="deleteUser{{$admin->id}}" data-bs-backdrop="static" data-bs-keyboard="false"
                                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -77,12 +76,12 @@
                                                                         <!-- <p class="card-description">
                                                                             Basic form layout
                                                                         </p> -->
-                                                                        <form class="forms-sample" wire:submit.prevent="destroy" id="delete_user{{$user->id}}">                                                        
+                                                                        <form class="forms-sample" wire:submit.prevent="destroy" id="delete_user{{$admin->id}}">                                                        
                                                                             <h5 class="card-description">
                                                                                 are you sure to delete user
                                                                             </h5>   
                                                                         </form>    
-                                                                        <button type="submit" class="btn btn-primary me-2" form="delete_user{{$user->id}}">yes delete</button>
+                                                                        <button type="submit" class="btn btn-primary me-2" form="delete_user{{$admin->id}}">yes delete</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -94,7 +93,7 @@
                                         </tbody>
                                     </table>
                                     <div class="wrap-pagination-info mb-4">
-                                        {{$users->links()}}
+                                        {{$admins->links()}}
                                     </div>
                                 </div>                             
                             </div>                              
@@ -107,3 +106,4 @@
         </div>
     </div>
 </div>
+

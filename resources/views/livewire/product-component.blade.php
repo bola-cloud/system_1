@@ -1,30 +1,27 @@
-<div>
+<div wire:ignore.self>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="row height d-flex justify-content-center align-items-center">
+                <div class="row height d-flex ">
                     <div class="col-md-9">
-                        <form >
-                            <div class="search">
-                                <i class="fa fa-search"></i>
-                                <input type="text" class="form-control" placeholder="Have a question? Ask Now" wire:model="search">
-                                <button class="btn btn-primary" type="submit" >Search</button>
-                            </div>
-                        </form>
+                        <div class="search">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control w-100" placeholder="search for product" wire:model="search">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid mt-3">
+    <div class="container mt-3">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card has-shadow">
                             <div class="card-header">
                                 <h4  style="float:left">Add product</h4>
-                                <a href="#" style="float:right ;" class="btn btn-outline-info" data-toggle="modal" data-target="#addProduct" >
+                                <a href="{{route('Add_product')}}" style="float:right ;" class="btn btn-outline-info">
                                     <i class="fa fa-plus"></i> Add new product
                                 </a>
                             </div>
@@ -54,16 +51,16 @@
                                                 <td>{{$product->quantity_inshop}}</td>
                                                 <td>
                                                     @if($product->quantity_total <= 15)
-                                                        <span class="badge badge-danger">{{$product->quantity_total}}</span>
+                                                        <span class="badge badge-danger text-danger">{{$product->quantity_total}}</span>
                                                     @else  
-                                                        <span class="badge badge-success">{{$product->quantity_total}}</span>
+                                                        <span class="badge badge-success text-primary">{{$product->quantity_total}}</span>
                                                     @endif
                                                 </td>
                                                 <td>{{$product->brand}}</td>
-                                                <td></td>
+                                                <td>{{$product->category->category_name}}</td>
                                                 <td>{{$product->created_at}}</td>
                                                 <td>
-                                                    <a href="#" data-toggle="modal" data-target="#editProduct{{$product->id}}" wire:click="edit({{$product->id}})" class="btn btn-primary mr-1">
+                                                    <a href="{{route('edit_prod',$product->id)}}" class="btn btn-primary mr-1">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     
@@ -76,7 +73,7 @@
                                             <!-- Modals --> 
                                             
                                             <!-- modal to edit product -->
-                                            <div class="modal right fade" id="editProduct{{$product->id}}" data-backdrop="static" data-keyboard="false"
+                                            <!-- <div class="modal right fade" id="editProduct{{$product->id}}" data-backdrop="static" data-keyboard="false"
                                             aria-labelledby="staticBackdropLabel" aria-hidden="true" wire:ignore.self>
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -89,7 +86,6 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form  wire:submit.prevent="update" id="update_product{{$product->id}}" enctype='multipart/form-data'>
-                                                            @csrf
                                                             <div class="form-group">
                                                                 <label for="">Name</label>
                                                                 <input type="text" name="product_name" wire:model.defer="product_name" value="{{$product->product_name}}" class="form-control">
@@ -146,7 +142,7 @@
                                                     </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <!-- modal to delete product -->
                                             <div class="modal right fade" id="deleteProduct{{$product->id}}" data-backdrop="static" data-keyboard="false"
@@ -166,10 +162,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form wire:submit.prevent="destroy" id="delete_product">
-                                                                @csrf 
-                                                                @method('delete')
-                                                                <p>Are you sure you want to delete {{$product->product_name}}</p>
-                                                                
+                                                                <p>Are you sure you want to delete {{$product->product_name}}</p>                                                       
                                                             </form>
                                                         </div>
                                                         <div class="modal-footer">
@@ -180,7 +173,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -193,84 +185,13 @@
                                         
 
                         <!-- modal to add product -->
-                        <div class="modal right fade" id="addProduct"  data-bs-backdrop="static" data-bs-keyboard="false"
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true" wire:ignore.self>
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form wire:submit.prevent="store"  id="add-form">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="">Name</label>
-                                                <input type="text" name="product_name"  wire:model.defer="product_name" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">description</label>
-                                                <textarea type="description" name="description"  wire:model.defer="description" cols="30" rows="2" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group d-inline-block mr-5">
-                                                <label for="">price</label>
-                                                <input type="number" name="price"  wire:model.defer="price" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block">
-                                                <label for="">Cost</label>
-                                                <input type="number" name="cost"  wire:model.defer="cost" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block mr-5">
-                                                <label for="">sale</label>
-                                                <input type="number" name="sale"  wire:model.defer="sale" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block ">
-                                                <label for="">sale_price</label>
-                                                <input type="number" name="sale_price"  wire:model.defer="sale_price" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block mr-5">
-                                                <label for="">Quantity_inshop</label>
-                                                <input type="number" name="quantity_inshop"  wire:model.defer="quantity_inshop" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block">
-                                                <label for="">quantity_total</label>
-                                                <input type="number" name="quantity_total"  wire:model.defer="quantity_total" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block mr-5">
-                                                <label for=""> Brand</label>
-                                                <input type="text" name="brand"  wire:model.defer="brand" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block">
-                                                <label for=""> code</label>
-                                                <input type="number" name="product_code" wire:model.defer="product_code" class="form-control">
-                                            </div>
-                                            <div class="form-group d-inline-block mr-5">
-                                                <select class="form-select" wire:model="category_id">
-                                                    <option>select</option>
-                                                    @foreach($categories as $category)
-                                                       <option value="{{$category->id}}">{{$category->category_name}}</option>    
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary" form="add-form" >Save product</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         
-
                     </div>   
                     <!-- end-col-md-9 -->
 
                     <!--category-->
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" wire:ignore.self>
                         <div class="card has-shadow">
                             <div class="card-header">
                                 <h5> product category</h5>

@@ -20,18 +20,20 @@ class CheckoutComponent extends Component
     public $Phone_number;
     public $first_name;
     public $Address;
-    public $shipping_fee;
+    public $shipping_fee = 0;
     public $haveShipping;
     public $havecouponcode;
     public $couponCode;
     public $discount;
     public $subtotalAfterDiscount;
-    public $taxAfterDiscount;
     public $totalAfterDiscount;
+    public $subtotal;
+    public $total;
     public $finishOrder;
     
     public function applyCoupon()
     {
+        // dd($this->couponCode);
         $coupon=Coupon::where('code',$this->couponCode)->first();
         if(!$coupon)
         {
@@ -50,10 +52,13 @@ class CheckoutComponent extends Component
             'cart_value'=>$coupon->cart_value
         ];
         Session::put('coupons',$coupons);
+        $this->calculateDiscounts();
+        // dd(session()->get('coupons'));
     }
 
     public function removeCoupon()
     {
+        $this->discount=0;
         session()->forget('coupons');
     }
 
@@ -69,7 +74,7 @@ class CheckoutComponent extends Component
             {
                 $this->discount =(Cart::instance('cart')->subtotal() * session()->get('coupons')['value'])/100;
             }
-            $this->subtotalAfterDiscount= Cart::instance('cart')->subtotal() -$this->discount;
+            $this->total=Cart::instance('cart')->subtotal() - $this->discount;
         }
     
     }  
@@ -91,10 +96,8 @@ class CheckoutComponent extends Component
             $order->user_id=Auth::id();
             $order->cust_name=$this->first_name;
             $order->phone=$this->Phone_number;
-            $order->subtotal=session()->get('checkout')[0]['subtotal'];
-            $order->discount=session()->get('checkout')[0]['discount'];
-            $order->total=session()->get('checkout')[0]['total'] ; 
-            //  + $this->shipping_fee
+            $this->subtotal=session()->get('checkout')[0]['subtotal'];
+            $order->subtotal=$this->subtotal;
             $order->is_shipping=$this->haveShipping ? 1:0;
             if($this->haveShipping)
             {
@@ -105,10 +108,19 @@ class CheckoutComponent extends Component
                 $order->address=$this->Address;
                 $order->delivery=$this->shipping_fee;
                 $order->status='delivered';
+                if($this->couponCode)
+                {
+                    $this->total += $this->shipping_fee;
+                    $order->discount=$this->discount;
+                }
+                else{
+                    $this->total=$this->subtotal + $this->shipping_fee; 
+                }
             }
             else{
                 $order->status='ordered';
             }
+            $order->total=$this->total;
             $order->save();
             foreach(Cart::instance('cart')->content() as $items)
             {   
@@ -146,6 +158,7 @@ class CheckoutComponent extends Component
             $this->verifyAuth();
             $this->finishOrder=1;
             Cart::instance('cart')->destroy();
+            $this->removeCoupon();
             $this->shipping_fee= null;
             session()->forget('checkout');
             session()->flash('success','checkout is success');
@@ -188,16 +201,16 @@ class CheckoutComponent extends Component
 
     public function render()
     {
-        if(session()->has('coupons'))
-        {
-            if(Cart::instance('cart')->subtotal() < session()->get('coupons')['cart_value'])
-            {
-                session()->forget('coupons');
-            }
-            else{
-                $this->calculateDiscounts();
-            }
-        }
+        // if(session()->has('coupons'))
+        // {
+        //     if(Cart::instance('cart')->subtotal() < session()->get('coupons')['cart_value'])
+        //     {
+        //         session()->forget('coupons');
+        //     }
+        //     else{
+        //         $this->calculateDiscounts();
+        //     }
+        // }
         return view('livewire.checkout-component')->layout('layouts.bars.navbar');
     }
 }

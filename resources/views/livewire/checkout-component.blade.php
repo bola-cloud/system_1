@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4" wire:ignore.self>
     <form wire:submit.prevent="placeOrder" id="frm-billing">
         <div class=" main-content-area">
             <div class="wrap-address-billing">
@@ -57,7 +57,7 @@
                     <p class="summary-info"><span class="title">tax </span><b class="index"></b></p>
                     <p class="summary-info"><span class="title">subtotal with discount</span><b class="index"></b></p>
                 @else
-                    <p class="summary-info"><span class="title">tax ({{config('cart.tax')}}%)</span><b class="index"> </b></p>
+                    <!-- <p class="summary-info"><span class="title">tax ({{config('cart.tax')}}%)</span><b class="index"> </b></p> -->
                     <p class="summary-info"><span class="title">shipping </span>
                         <b class="index">
                             @if($haveShipping ==1)
@@ -67,36 +67,50 @@
                             @endif
                         </b>
                     </p>
-                    <p class="summary-info total-info"><span class="title">Total </span><b class="index">:  {{Cart::instance('cart')->total()}}</b></p>
+                    <!-- <p class="summary-info total-info"><span class="title">Total </span><b class="index">:  {{Cart::instance('cart')->total()}}</b></p> -->
                 @endif
-                @if(!Session::has('coupon'))
-                    <div class="checkout-info">
-                        <label for="" class="checkbox-field">
-                            <input class="frm-input" name="have-code" id="have-code" type="checkbox" value="1"  wire:model="havecouponcode"><span class="ml-2">I have a coupon</span>
-                        </label>
-                        @if($havecouponcode ==1)
-                        <form wire:submit.prevent="applyCoupon" id="coupon">
-                            <h4 class="title-box">coupon code</h4>
-                            @if(Session::has('coupon_message'))
-                                <div class="alert alert-danger" role="danger">{{Session::get('coupon_message')}}</div>
+                <div class="checkout-info" wire:ignore.self>
+                    <label for="" class="checkbox-field">
+                        <input class="frm-input" name="have-code" id="have-code" type="checkbox" value="1"  wire:model="havecouponcode"><span class="ml-2">I have a coupon</span>
+                    </label>
+    </form>
+                    @if($havecouponcode ==1)
+                    <form wire:submit.prevent="applyCoupon" id="coupons">
+                        <h4 class="title-box">coupon code</h4>
+                        @if(Session::has('coupon_message'))
+                            <div class="alert alert-danger" role="danger">{{Session::get('coupon_message')}}</div>
+                        @endif
+                        <p class="row-in-form">
+                            <input type="text" name="coupon-code" placeholder="Enter discound code" wire:model="couponCode">
+                            @error('couponCode') <span class="text-danger">{{$message}}</span>@enderror
+                        </p>
+                    </form>
+                    <button type="submit" class="btn btn-small mb-3" form="coupons">apply</button>
+                    <!-- <button  class="btn btn-small mb-3" wire.click="removeCoupon">cancel</button> -->
+                    <p class="summary-info"><span class="title">Discount </span><b class="index"> : {{$discount}} </b></p>
+                    <p class="summary-info"><span class="title">AfterDiscount</span><b class="index"> :{{$total}} </b></p>
+                    @endif
+                    @if($haveShipping ==1)
+                        <!-- @php
+                            $formattedTotal = number_format(Cart::instance('cart')->total(), 2, '.', ',');
+                        @endphp -->
+                        @if($shipping_fee)
+                            @if($havecouponcode ==1)
+                                <p class="summary-info grand-total">
+                                    <span>Total with delivery</span> <span class="grand-total-price">{{Cart::instance('cart')->total() + $shipping_fee - $discount}}</span>
+                                </p>
+                            @else
+                                <p class="summary-info grand-total">
+                                    <span>Total with delivery</span> <span class="grand-total-price">{{Cart::instance('cart')->total() + $shipping_fee}}</span>
+                                </p>
                             @endif
-                            <p class="row-in-form">
-                                <input type="text" name="coupon-code" placeholder="Enter discound code" wire:model.defer="couponCode">
-                                @error('couponCode') <span class="text-danger">{{$message}}</span>@enderror
-                            </p>
-                            <button type="submit" class="btn btn-small mb-3" form="coupon">apply</button>
-                        </form>
-                        <p class="summary-info"><span class="title">Discount </span><b class="index"> : {{$discount}} </b></p>
-                        <p class="summary-info"><span class="title">totalAfterDiscount</span><b class="index"> :{{$totalAfterDiscount}} </b></p>
                         @endif
-                        @if($haveShipping ==1)
-                            <p class="summary-info grand-total"><span>Total with delivery</span> <span class="grand-total-price">{{Cart::instance('cart')->total()}}</span></p>
-                        @endif
-                    </div>
-                @endif
+
+                    @endif
+                </div>
                 <button class="btn btn-medium" type="submit" form="frm-billing">Place order now</button>                
             </div>
         </div>
-    <!-- </form> -->
+    
 
 </div>

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Open+Sans);@charset "UTF-8";
 
 /*!
  * Bootstrap  v5.2.0 (https://getbootstrap.com/)
@@ -741,7 +741,7 @@ progress {
 
 .row > * {
   flex-shrink: 0;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
@@ -12656,5 +12656,226 @@ fieldset:disabled .btn {
   .d-print-none {
     display: none !important;
   }
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: #f5f7fa;
+  font-family: "Open Sans", Helvetica, sans-serif;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+body nav {
+  display: flex;
+  justify-content: space-between;
+  background: #34495e;
+  padding: 9px 0;
+}
+
+body nav ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+body nav ul li {
+  list-style-type: none;
+}
+
+body nav ul li a {
+  color: #fff;
+  padding: 20px;
+}
+
+body nav ul li a:hover {
+  background: #22303d;
+}
+
+body nav .search input {
+  width: 394px;
+  height: 40px;
+  margin-right: 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+body nav .search input::-moz-placeholder {
+  font-style: italic;
+}
+
+body nav .search input:-ms-input-placeholder {
+  font-style: italic;
+}
+
+body nav .search input::placeholder {
+  font-style: italic;
+}
+
+body .sellables-container {
+  display: flex;
+  flex: 1;
+}
+
+body .sellables-container .sellables {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+body .sellables-container .sellables .categories {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.5em;
+}
+
+body .sellables-container .sellables .categories .category {
+  padding: 17.5px;
+  margin: 2px;
+  border: 1px solid #c8cfd8;
+  border-radius: 5px;
+  background: #e6e9ed;
+  color: #424A54;
+}
+
+body .sellables-container .sellables .categories .category:hover {
+  background: #c8cfd8;
+}
+
+body .sellables-container .sellables .categories .active {
+  background: #bac2cd;
+  color: #424A54;
+}
+
+body .sellables-container .sellables .categories .active:hover {
+  background: #abb5c2;
+}
+
+body .sellables-container .sellables .item-group-wrapper {
+  overflow-y: scroll;
+}
+
+body .sellables-container .sellables .item-group-wrapper .item-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body .sellables-container .sellables .item-group-wrapper .item-group .item {
+  padding: 50px 35px;
+  margin: 0.5em 0.5em;
+  border-radius: 5px;
+  background: #9b59b6;
+  color: #fff;
+}
+
+body .sellables-container .sellables .item-group-wrapper .item-group .item:hover {
+  background: #804399;
+}
+
+body .sellables-container .register-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body .sellables-container .register-wrapper .customer input {
+  height: 40px;
+  width: 394px;
+  margin-top: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+}
+
+body .sellables-container .register-wrapper .customer input::-moz-placeholder {
+  font-style: italic;
+}
+
+body .sellables-container .register-wrapper .customer input:-ms-input-placeholder {
+  font-style: italic;
+}
+
+body .sellables-container .register-wrapper .customer input::placeholder {
+  font-style: italic;
+}
+
+body .sellables-container .register-wrapper .register {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  width: 400px;
+  margin: 1em 2em;
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  background: #fff;
+}
+
+body .sellables-container .register-wrapper .register .products {
+  display: flex;
+  flex-direction: column;
+}
+
+body .sellables-container .register-wrapper .register .products .product-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background: #fff;
+}
+
+body .sellables-container .register-wrapper .register .products .product-bar:first-child {
+  margin-top: 1em;
+}
+
+body .sellables-container .register-wrapper .register .products .product-bar:hover {
+  background: #e6e6e6;
+}
+
+body .sellables-container .register-wrapper .register .products .selected {
+  background: #68b3c8;
+  color: #fff;
+}
+
+body .sellables-container .register-wrapper .register .products .selected:hover {
+  background: #44a0b9;
+}
+
+body .sellables-container .register-wrapper .register .pay-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body .sellables-container .register-wrapper .register .pay-button a {
+  padding: 10px 125px;
+  margin: 1em 0;
+  border-radius: 5px;
+  background: #42a07f;
+  color: #fff;
+}
+
+body .sellables-container .register-wrapper .register .pay-button a:hover {
+  background: #3b8e71;
 }
 

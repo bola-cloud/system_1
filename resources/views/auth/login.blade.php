@@ -16,11 +16,10 @@
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control " name="name" value="{{ old('name') }}" required autocomplete="name" autofocus >
-
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </div>
                                 @enderror
                             </div>
                         </div>
@@ -32,9 +31,9 @@
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <div class="alert alert-danger" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                    </div>
                                 @enderror
                             </div>
                         </div>

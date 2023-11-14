@@ -62,7 +62,7 @@
                                             <th> cust_name</th>
                                             <th>phone</th>
                                             <th>total</th>
-                                            <th>discound</th>
+                                            <th>discount</th>
                                             <th>status</th>
                                             <th>address</th>
                                             <th>shpping</th>
@@ -78,7 +78,7 @@
                                                 <td>{{$order->cust_name}}</td>
                                                 <td>{{$order->phone}}</td>
                                                 <td>{{$order->total}}</td>
-                                                <td>{{$order->discound}}</td>
+                                                <td>{{$order->discount}}</td>
                                                 <td>{{$order->status}}</td>
                                                 <td>{{$order->address}}</td>
                                                 @if($order->is_shipping == 1)
